@@ -1,15 +1,14 @@
-import { getPetfinderApi } from './apis/petFinderApi.js';
+import { createCatOptionsForm, getUserCatOptions } from './pages/adoptACat';
 import { sendSMS } from './apis/twilioAPI.js';
 
-const petFinderButton = document.getElementById('petFinderButton');
+const typesOfCatsFormElement = document.getElementById('catOptions');
+const typesofCatsSubmitButton = document.getElementById('catOptionsSubmit');
 
-const fetchPetfinder = async () => {
-  return await getPetfinderApi('https://api.petfinder.com/v2/animals');
-};
+const formElements = await createCatOptionsForm(typesOfCatsFormElement);
 
-petFinderButton.addEventListener('click', async () => {
-  const data = await fetchPetfinder();
-  console.log(data);
-});
+typesofCatsSubmitButton.addEventListener('click', (e) => {
+  e.preventDefault();
+  getUserCatOptions(formElements);
+})
 
 // sendSMS('Testing from main.js').then((res) => console.log(res));
