@@ -1,6 +1,6 @@
 export async function sendSMS(message) {
   const myHeaders = new Headers();
-  myHeaders.append('Authorization', `Basic ${import.meta.env.TWILIO_TOKEN}`);
+  myHeaders.append('Authorization', `Basic ${import.meta.env.VITE_TWILIO_AUTH_TOKEN}`);
   myHeaders.append('Content-Type', 'application/x-www-form-urlencoded');
 
   const urlencoded = new URLSearchParams();
