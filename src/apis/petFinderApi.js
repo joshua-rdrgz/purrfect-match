@@ -26,7 +26,7 @@ const getPetfinderAccessToken = async () => {
   }
 };
 
-export const getPetfinderApi = async (url, params = {}) => {
+export const fetchPetfinder = async (url, params = {}) => {
   try {
     const { access_token } = await getPetfinderAccessToken();
     const requestOptions = {
