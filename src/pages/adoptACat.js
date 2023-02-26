@@ -160,7 +160,7 @@ export const displayAvailableCats = (data, element) => {
         ${contact.address.state && `<p>${contact.address.state}</p>`}
         ${contact.address.country && `<p>${contact.address.country}</p>`}
         ${contact.address.postcode && `<p>${contact.address.postcode}</p>`}
-        ${contact.email && `<p>${contact.email}</p>`}d ju
+        ${contact.email && `<p>${contact.email}</p>`}
         ${contact.phone && `<p>${contact.phone}</p>`}
         <button class="text-for-details-cta bg-red-600">Text Me Details!</button>
       </li>
