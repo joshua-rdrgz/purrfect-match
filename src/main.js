@@ -38,6 +38,10 @@ if (window.location.href.split('/').at(-1) === 'findBreed.html') {
     const res = await postImageToServer(imageInput.files[0]);
     const roboFlowPredictions = await getRoboFlowPrediction(res.imageName);
     console.log('roboFlowPredictions:', roboFlowPredictions);
+    console.log(roboFlowPredictions.data.top)
+    console.log(roboFlowPredictions.data.top.replace(/\s+/g, '-'))
+    document.getElementById('catOutputText').innerHTML = roboFlowPredictions.data.top
+    document.getElementById('catPicUnsplash').innerHTML = `https://source.unsplash.com/720x600/?${roboFlowPredictions.data.top.replace(/\s+/g, '-')}`;
   });
 }
 
