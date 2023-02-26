@@ -1,26 +1,43 @@
-import { createCatOptionsForm, getAvailableCats } from './pages/adoptACat';
+import {
+  createCatOptionsForm,
+  getAvailableCats,
+  displayAvailableCats,
+} from './pages/adoptACat';
+import {
+  getFormForUploadingImage,
+  postImageToServer,
+  getRoboFlowPrediction
+} from './apis/RoboflowApi';
 import { sendSMS } from './apis/twilioAPI.js';
 
 // ONLY WORKS ON adoptACat.html PAGE!
 if (window.location.href.split('/').at(-1) === 'adoptACat.html') {
   const typesOfCatsFormElement = document.getElementById('catOptions');
   const typesofCatsSubmitButton = document.getElementById('catOptionsSubmit');
+  const displayAvailableCatsEl = document.getElementById(
+    'available-cats-results'
+  );
   const formElements = await createCatOptionsForm(typesOfCatsFormElement);
 
   typesofCatsSubmitButton.addEventListener('click', async (e) => {
     e.preventDefault();
-    await getAvailableCats(formElements);
+    const availableCatData = await getAvailableCats(formElements);
+    displayAvailableCats(availableCatData, displayAvailableCatsEl.children[0]);
   });
 }
-console.log('testing');
 
 if (window.location.href.split('/').at(-1) === 'findBreed.html') {
-  const submitButton = document.getElementById('imageButtonSubmit');
-  console.log(submitButton);
+  const imageFormSection = document.getElementById('image-submission-form');
+  const imageFormHtml = await getFormForUploadingImage();
+  imageFormSection.insertAdjacentHTML('afterbegin', imageFormHtml);
 
-  submitButton.addEventListener('click', (e) => {
+  const imageForm = document.getElementById('image-to-server-form');
+  const imageInput = document.getElementById('image-to-server-input');
+  imageForm.addEventListener('submit', async (e) => {
     e.preventDefault();
-    console.log('hello from main.js');
+    const res = await postImageToServer(imageInput.files[0]);
+    const roboFlowPredictions = await getRoboFlowPrediction(res.imageName);
+    console.log('roboFlowPredictions:', roboFlowPredictions);
   });
 }
 

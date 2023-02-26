@@ -1,32 +1,50 @@
-//check if i need an access token
-//docs will tell me everyone
-function getImage( ){
-alert("You have pressed the button!");
+export async function getFormForUploadingImage() {
+  try {
+    const res = await fetch(import.meta.env.VITE_SERVER);
+    const formHtml = res.text();
+    return formHtml;
+  } catch (error) {
+    console.error('💥💥💥ERROR OCCURRED💥💥💥 : ', error);
+    return null;
+  }
+}
 
-};
+export async function postImageToServer(imageFile) {
+  try {
+    const requestOptions = {
+      method: 'POST',
+      body: new FormData(),
+    };
+    requestOptions.body.append('image', imageFile);
+    requestOptions.body.enctype = 'multipart/form-data';
+    const res = await fetch(
+      `${import.meta.env.VITE_SERVER}/upload`,
+      requestOptions
+    );
 
+    if (!res.ok) throw new Error();
 
-const axios = require("axios");
-const fs = require("fs");
+    const data = await res.text();
+    return JSON.parse(data);
+  } catch (error) {
+    console.error('💥💥💥ERROR OCCURRED💥💥💥 : ', error);
+    return null;
+  }
+}
 
-const image = fs.readFileSync("cat.jpg", {
-    encoding: "base64"
-});
-
-axios({
-    method: "POST",
-    url: "https://classify.roboflow.com/purrfect-match-model/42",
-    params: {
-        api_key: import.meta.env.VITE_ROBOFLOW_API_KEY
-    },
-    data: image,
-    headers: {
-        "Content-Type": "application/x-www-form-urlencoded"
-    }
-})
-.then(function(response) {
-    console.log(response.data);
-})
-.catch(function(error) {
-    console.log(error.message);
-});
+export async function getRoboFlowPrediction(imageName) {
+  try {
+    const requestOptions = {
+      method: 'POST',
+    };
+    const res = await fetch(
+      `${import.meta.env.VITE_SERVER}/roboflow/${imageName}`,
+      requestOptions
+    );
+    const data = await res.text();
+    return JSON.parse(data);
+  } catch (error) {
+    console.error('💥💥💥ERROR OCCURRED💥💥💥 : ', error);
+    return null;
+  }
+}
