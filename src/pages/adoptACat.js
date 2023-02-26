@@ -13,14 +13,14 @@ export const createCatOptionsForm = async (htmlElement) => {
 
   let formHTML = `
     <fieldset id="field-age">
-      <legend>Age of Cat</legend>
+      <legend class ="ml-3 text-xl font-medium text-white container mx-auto flex  p-5 flex-col flex-row items-center">Age of Cat</legend>
       <input type="checkbox" name="age-of-cat" id="age-of-cat-baby" value="baby">Baby</input>
       <input type="checkbox" name="age-of-cat" id="age-of-cat-young" value="young">Young</input>
       <input type="checkbox" name="age-of-cat" id="age-of-cat-adult" value="adult">Adult</input>
       <input type="checkbox" name="age-of-cat" id="age-of-cat-senior" value="senior">Senior</input>
     </fieldset>
     <fieldset id="field-size">
-      <legend class = "font-white">Size of Cat</legend>
+      <legend class ="ml-3 text-xl font-medium text-white container mx-auto flex  p-5 flex-col flex-row items-center" >Size of Cat</legend>
       <input type="checkbox" name="size-of-cat" id="size-of-cat-small" value="small">Small</input>
       <input type="checkbox" name="size-of-cat" id="size-of-cat-medium" value="medium">Medium</input>
       <input type="checkbox" name="size-of-cat" id="size-of-cat-large" value="large">Large</input>
