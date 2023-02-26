@@ -19,11 +19,11 @@ if (window.location.href.split('/').at(-1) === 'findBreed.html') {
   const submitButton = document.getElementById('imageButtonSubmit');
   console.log(submitButton);
 
-  submitButton.addEventListener('click',  (e) => {
+  submitButton.addEventListener('click', async (e) => {
     e.preventDefault();
     console.log('HELP uS')
-    //const item = await fetchRoboFlow()
-    //console.log(item)
+    const item = await fetchRoboFlow(`https://classify.roboflow.com/?model=purrfect-match-model&version=1&api_key=${import.meta.env.VITE_ROBOFLOW_API_KEY}`)
+    console.log(item)
   });
 }
 
