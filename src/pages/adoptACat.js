@@ -87,7 +87,10 @@ const generateCatSearchParams = (formElements) => {
       );
 
       if (chosenFieldName) {
-        requestOptions.append(chosenFieldName, chosenValues.join(',').toLowerCase());
+        requestOptions.append(
+          chosenFieldName,
+          chosenValues.join(',').toLowerCase()
+        );
       }
     }
 
@@ -124,11 +127,12 @@ export const getAvailableCats = async (formElements) => {
   const searchParams = generateCatSearchParams(formElements);
   console.log(searchParams.toString());
   try {
-    const data = await fetchPetfinder('https://api.petfinder.com/v2/animals?' + searchParams);
-
-    console.log(data);
+    const data = await fetchPetfinder(
+      'https://api.petfinder.com/v2/animals?' + searchParams
+    );
+    return data;
   } catch (error) {
     console.error('💥💥💥ERROR OCCURRED💥💥💥 : ', error);
     return null;
   }
-}
+};
