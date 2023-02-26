@@ -56,20 +56,6 @@ export const createCatOptionsForm = async (htmlElement) => {
   return formIds.map((formId) => document.getElementById(formId));
 };
 
-// OPTIONS FOR FINDING CATS
-// - type: cat
-// - breed: (accounted for)
-// - gender: (accounted for)
-// - color: (accounted for)
-// - coats: (accounted for)
-// - status: defaults to adoptable (accounted for)
-// - size: small, medium, large, xlarge (accepts multiple values) -- NOT accounted for
-// - age: baby, young, adult, senior (accepts multiple values) -- NOT accounted for
-// - location: city, state; latitude,longitude; or postal code. -- NOT accounted for
-// - distance: max is 500 miles -- NOT accounted for
-
-// - sort, - page, - limit -- set up after everything else
-
 const generateCatSearchParams = (formElements) => {
   const requestOptions = new URLSearchParams();
   requestOptions.append('type', 'cat');
@@ -135,4 +121,51 @@ export const getAvailableCats = async (formElements) => {
     console.error('💥💥💥ERROR OCCURRED💥💥💥 : ', error);
     return null;
   }
+};
+
+export const displayAvailableCats = (data, element) => {
+  const { animals: catsForAdoption, pagination } = data;
+  console.log(catsForAdoption);
+  let sectionHTML = '';
+
+  for (const catForAdoption of catsForAdoption) {
+    const {
+      name,
+      age,
+      breeds,
+      coat,
+      colors,
+      description,
+      primary_photo_cropped: image,
+      tags,
+      contact,
+    } = catForAdoption;
+    sectionHTML += `
+      <li>
+        <img src="${image.full}" alt="The cute cat, ${name}">
+        <h3>${name}</h3>
+        <p>Age: ${age} years old</p>
+        <p>Primary Breed: ${breeds.primary}</p>
+        ${breeds.secondary && `<p>Secondary Breed: ${breeds.secondary}</p>`}
+        <p>Primary Color: ${colors.primary}</p>
+        ${colors.secondary && `<p>Secondary Color: ${colors.secondary}</p>`}
+        ${colors.tertiary && `<p>Tertiary Color: ${colors.tertiary}</p>`}
+        <p>Coat: ${coat}</p>
+        <p>${description}</p>
+        <p>Attributes: ${tags.map((tag) => `<p>${tag}</p>`).join('')}</p>
+        <h4>Contact Information</h4>
+        ${contact.address.address1 && `<p>${contact.address.address1}</p>`}
+        ${contact.address.address2 && `<p>${contact.address.address2}</p>`}
+        ${contact.address.city && `<p>${contact.address.city}</p>`}
+        ${contact.address.state && `<p>${contact.address.state}</p>`}
+        ${contact.address.country && `<p>${contact.address.country}</p>`}
+        ${contact.address.postcode && `<p>${contact.address.postcode}</p>`}
+        ${contact.email && `<p>${contact.email}</p>`}d ju
+        ${contact.phone && `<p>${contact.phone}</p>`}
+        <button class="text-for-details-cta bg-red-600">Text Me Details!</button>
+      </li>
+    `;
+  }
+
+  element.insertAdjacentHTML('beforeend', sectionHTML);
 };

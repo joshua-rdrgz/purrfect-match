@@ -22,7 +22,7 @@ if (window.location.href.split('/').at(-1) === 'adoptACat.html') {
   typesofCatsSubmitButton.addEventListener('click', async (e) => {
     e.preventDefault();
     const availableCatData = await getAvailableCats(formElements);
-    displayAvailableCats(availableCatData, displayAvailableCatsEl.children[0]);
+    displayAvailableCats(availableCatData, displayAvailableCatsEl);
   });
 }
 
