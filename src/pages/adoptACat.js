@@ -20,7 +20,7 @@ export const createCatOptionsForm = async (htmlElement) => {
       <input type="checkbox" name="age-of-cat" id="age-of-cat-senior" value="senior">Senior</input>
     </fieldset>
     <fieldset id="field-size">
-      <legend>Size of Cat</legend>
+      <legend class = "font-white">Size of Cat</legend>
       <input type="checkbox" name="size-of-cat" id="size-of-cat-small" value="small">Small</input>
       <input type="checkbox" name="size-of-cat" id="size-of-cat-medium" value="medium">Medium</input>
       <input type="checkbox" name="size-of-cat" id="size-of-cat-large" value="large">Large</input>
