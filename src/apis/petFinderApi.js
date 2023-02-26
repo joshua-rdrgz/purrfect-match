@@ -5,7 +5,10 @@ const getPetfinderAccessToken = async () => {
   const urlencoded = new URLSearchParams();
   urlencoded.append('grant_type', 'client_credentials');
   urlencoded.append('client_id', import.meta.env.VITE_PETFINDER_CLIENT_ID);
-  urlencoded.append('client_secret', import.meta.env.VITE_PETFINDER_CLIENT_SECRET);
+  urlencoded.append(
+    'client_secret',
+    import.meta.env.VITE_PETFINDER_CLIENT_SECRET
+  );
 
   const requestOptions = {
     method: 'POST',
@@ -43,7 +46,7 @@ export const fetchPetfinder = async (url, params = {}) => {
     if (!res.ok) throw new Error(`${res.status}: ${res.statusText}`);
 
     const data = await res.text();
-    return JSON.parse(data)
+    return JSON.parse(data);
   } catch (error) {
     console.error('💥💥💥ERROR OCCURRED💥💥💥 : ', error);
     return null;

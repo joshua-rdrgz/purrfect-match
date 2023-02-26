@@ -11,8 +11,6 @@ export const createCatOptionsForm = async (htmlElement) => {
 
   const formObj = { ...catTypes, ...breeds };
 
-  console.log(formObj);
-
   let formHTML = `
     <fieldset id="field-age">
       <legend>Age of Cat</legend>
@@ -29,6 +27,7 @@ export const createCatOptionsForm = async (htmlElement) => {
       <input type="checkbox" name="size-of-cat" id="size-of-cat-xlarge" value="xlarge">X-Large</input>
     </fieldset>
   `;
+
   const formIds = ['field-age', 'field-size'];
 
   for (const pair of Object.entries(formObj)) {
@@ -70,19 +69,66 @@ export const createCatOptionsForm = async (htmlElement) => {
 // - distance: max is 500 miles -- NOT accounted for
 
 // - sort, - page, - limit -- set up after everything else
-export const getUserCatOptions = (formElements) => {
+
+const generateCatSearchParams = (formElements) => {
+  const requestOptions = new URLSearchParams();
+  requestOptions.append('type', 'cat');
+
   for (const formElement of formElements) {
+    // FIELD SET INPUTS
     if (formElement.type === 'fieldset') {
-      const chosenValues = Array.from(formElement.children)
+      const chosenInputs = Array.from(formElement.children)
         .splice(1) // take off legend / label of fieldset
-        .filter((inputElement) => inputElement.checked)
-        .map((chosenInputEl) => chosenInputEl.value);
-      console.log(chosenValues);
+        .filter((inputElement) => inputElement.checked);
+
+      const chosenFieldName = chosenInputs[0]?.id.split('-')[0];
+      const chosenValues = chosenInputs.map(
+        (chosenInputEl) => chosenInputEl.value
+      );
+
+      if (chosenFieldName) {
+        requestOptions.append(chosenFieldName, chosenValues.join(',').toLowerCase());
+      }
     }
 
+    // SELECT / OPTION INPUTS
     if (formElement.type === 'select-one') {
-      const chosenValue = formElement.options[formElement.selectedIndex].value;
-      console.log(chosenValue);
+      const generatedChosenFieldName = formElement.id.split('-').at(-1);
+      const chosenValues = formElement.options[formElement.selectedIndex].value;
+      let chosenFieldName;
+
+      switch (generatedChosenFieldName) {
+        case 'coats':
+          chosenFieldName = 'coats';
+          break;
+        case 'colors':
+          chosenFieldName = 'color';
+          break;
+        case 'genders':
+          chosenFieldName = 'gender';
+          break;
+        case 'breeds':
+          chosenFieldName = 'breed';
+          break;
+        default:
+          throw new Error('must be: coats, colors, genders, or breeds.');
+      }
+
+      requestOptions.append(chosenFieldName, chosenValues.toLowerCase());
     }
   }
+  return requestOptions;
 };
+
+export const getAvailableCats = async (formElements) => {
+  const searchParams = generateCatSearchParams(formElements);
+  console.log(searchParams.toString());
+  try {
+    const data = await fetchPetfinder('https://api.petfinder.com/v2/animals?' + searchParams);
+
+    console.log(data);
+  } catch (error) {
+    console.error('💥💥💥ERROR OCCURRED💥💥💥 : ', error);
+    return null;
+  }
+}
