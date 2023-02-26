@@ -1,5 +1,6 @@
 import { createCatOptionsForm, getAvailableCats } from './pages/adoptACat';
 import { sendSMS } from './apis/twilioAPI.js';
+import {fetchRoboFlow} from './apis/roboFlowApi.js'
 
 // ONLY WORKS ON adoptACat.html PAGE!
 if (window.location.href.split('/').at(-1) === 'adoptACat.html') {
@@ -18,9 +19,11 @@ if (window.location.href.split('/').at(-1) === 'findBreed.html') {
   const submitButton = document.getElementById('imageButtonSubmit');
   console.log(submitButton);
 
-  submitButton.addEventListener('click', (e) => {
+  submitButton.addEventListener('click',  (e) => {
     e.preventDefault();
-    console.log('hello from main.js');
+    console.log('HELP uS')
+    //const item = await fetchRoboFlow()
+    //console.log(item)
   });
 }
 
