@@ -1,15 +1,15 @@
 import { fetchPetfinder } from '../apis/petFinderApi.js';
 
-export const createCatOptionsForm = async (htmlElement) => {
-  const { type: catTypes } = await fetchPetfinder(
+export let createCatOptionsForm = async (htmlElement) => {
+  let { type: catTypes } = await fetchPetfinder(
     'https://api.petfinder.com/v2/types/cat'
   );
 
-  const breeds = await fetchPetfinder(
+  let breeds = await fetchPetfinder(
     'https://api.petfinder.com/v2/types/cat/breeds'
   );
 
-  const formObj = { ...catTypes, ...breeds };
+  let formObj = { ...catTypes, ...breeds };
 
   let formHTML = `
     <fieldset id="field-age">
@@ -28,10 +28,10 @@ export const createCatOptionsForm = async (htmlElement) => {
     </fieldset>
   `;
 
-  const formIds = ['field-age', 'field-size'];
+  let formIds = ['field-age', 'field-size'];
 
-  for (const pair of Object.entries(formObj)) {
-    const [pairKey, pairValues] = pair;
+  for (let pair of Object.entries(formObj)) {
+    let [pairKey, pairValues] = pair;
     if (!Array.isArray(pairValues)) continue;
 
     formIds.push(`selectField-${pairKey}`);
@@ -41,7 +41,7 @@ export const createCatOptionsForm = async (htmlElement) => {
       <select id="selectField-${pairKey}" name="${pairKey}" id="${pairKey}">
         ${pairValues
           .map((pairValue) => {
-            const option = pairValue.name ? pairValue.name : pairValue;
+            let option = pairValue.name ? pairValue.name : pairValue;
             return `
             <option value="${option}">${option}</option>
           `;
@@ -56,19 +56,19 @@ export const createCatOptionsForm = async (htmlElement) => {
   return formIds.map((formId) => document.getElementById(formId));
 };
 
-const generateCatSearchParams = (formElements) => {
-  const requestOptions = new URLSearchParams();
+let generateCatSearchParams = (formElements) => {
+  let requestOptions = new URLSearchParams();
   requestOptions.append('type', 'cat');
 
-  for (const formElement of formElements) {
+  for (let formElement of formElements) {
     // FIELD SET INPUTS
     if (formElement.type === 'fieldset') {
-      const chosenInputs = Array.from(formElement.children)
+      let chosenInputs = Array.from(formElement.children)
         .splice(1) // take off legend / label of fieldset
         .filter((inputElement) => inputElement.checked);
 
-      const chosenFieldName = chosenInputs[0]?.id.split('-')[0];
-      const chosenValues = chosenInputs.map(
+      let chosenFieldName = chosenInputs[0]?.id.split('-')[0];
+      let chosenValues = chosenInputs.map(
         (chosenInputEl) => chosenInputEl.value
       );
 
@@ -82,8 +82,8 @@ const generateCatSearchParams = (formElements) => {
 
     // SELECT / OPTION INPUTS
     if (formElement.type === 'select-one') {
-      const generatedChosenFieldName = formElement.id.split('-').at(-1);
-      const chosenValues = formElement.options[formElement.selectedIndex].value;
+      let generatedChosenFieldName = formElement.id.split('-').at(-1);
+      let chosenValues = formElement.options[formElement.selectedIndex].value;
       let chosenFieldName;
 
       switch (generatedChosenFieldName) {
@@ -109,11 +109,11 @@ const generateCatSearchParams = (formElements) => {
   return requestOptions;
 };
 
-export const getAvailableCats = async (formElements) => {
-  const searchParams = generateCatSearchParams(formElements);
+export let getAvailableCats = async (formElements) => {
+  let searchParams = generateCatSearchParams(formElements);
   console.log(searchParams.toString());
   try {
-    const data = await fetchPetfinder(
+    let data = await fetchPetfinder(
       'https://api.petfinder.com/v2/animals?' + searchParams
     );
     return data;
@@ -123,13 +123,13 @@ export const getAvailableCats = async (formElements) => {
   }
 };
 
-export const displayAvailableCats = (data, element) => {
-  const { animals: catsForAdoption, pagination } = data;
+export let displayAvailableCats = (data, element) => {
+  let { animals: catsForAdoption, pagination } = data;
   console.log(catsForAdoption);
   let sectionHTML = '';
 
-  for (const catForAdoption of catsForAdoption) {
-    const {
+  for (let catForAdoption of catsForAdoption) {
+    let {
       name,
       age,
       breeds,
