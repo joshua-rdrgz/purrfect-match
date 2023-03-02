@@ -1,7 +1,7 @@
 export async function getFormForUploadingImage() {
   try {
-    const res = await fetch(
-      import.meta.env.VITE_SERVER);
+    console.log(process.env.SERVER_URL)
+    const res = await fetch(process.env.SERVER_URL);
     const formHtml = res.text();
     return formHtml;
   } catch (error) {
@@ -39,7 +39,7 @@ export async function getRoboFlowPrediction(imageName) {
       method: 'POST',
     };
     const res = await fetch(
-      `${import.meta.env.VITE_SERVER}/roboflow/${imageName}`,
+      `${process.env.SERVER_URL}/roboflow/${imageName}`,
       requestOptions
     );
     const data = await res.text();

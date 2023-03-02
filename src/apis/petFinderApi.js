@@ -4,12 +4,8 @@ const getPetfinderAccessToken = async () => {
 
   const urlencoded = new URLSearchParams();
   urlencoded.append('grant_type', 'client_credentials');
-  urlencoded.append('client_id',
-    import.meta.env.VITE_PETFINDER_CLIENT_ID);
-  urlencoded.append(
-    'client_secret',
-    import.meta.env.VITE_PETFINDER_CLIENT_SECRET
-  );
+  urlencoded.append('client_id', process.env.PETFINDER_CLIENT_ID);
+  urlencoded.append('client_secret', process.env.PETFINDER_CLIENT_SECRET);
 
   const requestOptions = {
     method: 'POST',
@@ -32,9 +28,7 @@ const getPetfinderAccessToken = async () => {
 
 export const fetchPetfinder = async (url, params = {}) => {
   try {
-    const {
-      access_token
-    } = await getPetfinderAccessToken();
+    const { access_token } = await getPetfinderAccessToken();
     const requestOptions = {
       method: 'GET',
       redirect: 'follow',

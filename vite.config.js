@@ -1,20 +1,25 @@
-import {
-  defineConfig,
-  loadEnv
-} from 'vite';
-import {
-  resolve
-} from 'path';
+import { defineConfig } from 'vite';
+import { config } from 'dotenv';
 
-export default defineConfig(({
-  command,
-  mode
-}) => {
-  const env = loadEnv(mode, process.cwd(), '');
-  return {
-    // ENV Variable Setup
-    define: {
-      __APP_ENV__: env.APP_ENV,
-    },
-  };
+config();
+
+export default defineConfig({
+  define: {
+    'process.env.TWILIO_ACCOUNT_SID': JSON.stringify(
+      process.env.TWILIO_ACCOUNT_SID
+    ),
+    'process.env.TWILIO_AUTH_TOKEN': JSON.stringify(
+      process.env.TWILIO_AUTH_TOKEN
+    ),
+    'process.env.PETFINDER_CLIENT_ID': JSON.stringify(
+      process.env.PETFINDER_CLIENT_ID
+    ),
+    'process.env.PETFINDER_CLIENT_SECRET': JSON.stringify(
+      process.env.PETFINDER_CLIENT_SECRET
+    ),
+    'process.env.ROBOFLOW_API_KEY': JSON.stringify(
+      process.env.ROBOFLOW_API_KEY
+    ),
+    'process.env.SERVER_URL': JSON.stringify(process.env.SERVER_URL),
+  },
 });
