@@ -1,6 +1,5 @@
 export async function getFormForUploadingImage() {
   try {
-    console.log(process.env.SERVER_URL)
     const res = await fetch(process.env.SERVER_URL);
     const formHtml = res.text();
     return formHtml;
@@ -19,7 +18,7 @@ export async function postImageToServer(imageFile) {
     requestOptions.body.append('image', imageFile);
     requestOptions.body.enctype = 'multipart/form-data';
     const res = await fetch(
-      `${import.meta.env.VITE_SERVER}/upload`,
+      `${process.env.SERVER_URL}/upload`,
       requestOptions
     );
 
