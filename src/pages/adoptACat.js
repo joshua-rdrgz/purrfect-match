@@ -1,4 +1,5 @@
 import { fetchPetfinder } from '../apis/petFinderApi.js';
+import { catData } from '../utils/fieldSets.js';
 
 export let createCatOptionsForm = async (htmlElement) => {
   let { type: catTypes } = await fetchPetfinder(
@@ -11,22 +12,28 @@ export let createCatOptionsForm = async (htmlElement) => {
 
   let formObj = { ...catTypes, ...breeds };
 
-  let formHTML = `
-    <fieldset id="field-age">
-      <legend>Age of Cat</legend>
-      <input type="checkbox" name="age-of-cat" id="age-of-cat-baby" value="baby">Baby</input>
-      <input type="checkbox" name="age-of-cat" id="age-of-cat-young" value="young">Young</input>
-      <input type="checkbox" name="age-of-cat" id="age-of-cat-adult" value="adult">Adult</input>
-      <input type="checkbox" name="age-of-cat" id="age-of-cat-senior" value="senior">Senior</input>
-    </fieldset>
-    <fieldset id="field-size">
-      <legend>Size of Cat</legend>
-      <input type="checkbox" name="size-of-cat" id="size-of-cat-small" value="small">Small</input>
-      <input type="checkbox" name="size-of-cat" id="size-of-cat-medium" value="medium">Medium</input>
-      <input type="checkbox" name="size-of-cat" id="size-of-cat-large" value="large">Large</input>
-      <input type="checkbox" name="size-of-cat" id="size-of-cat-xlarge" value="xlarge">X-Large</input>
-    </fieldset>
-  `;
+  let formHTML = '';
+
+  for (const fieldObj of catData) {
+    const { name, legend, types } = fieldObj;
+    formHTML += `
+      <fieldset id="field-${name}" class="flex space-x-4">
+      <legend class="ml-3 text-xl font-medium text-white container mx-auto flex p-5 flex-col flex-row items-center">${legend}: Choose 1 Or More</legend>
+    `;
+
+    for (const type of types) {
+      formHTML += `
+        <div class="flex flex-col-reverse">
+          <label for="${name}-of-cat-${type}" class="text-l p-5">${type}</label>
+          <input type="checkbox" name="${name}-of-cat-${type}" id="age-of-cat-${type}" value="${type}">
+        </div>
+      `;
+    }
+
+    formHTML += `
+      </fieldset>
+    `;
+  }
 
   let formIds = ['field-age', 'field-size'];
 
@@ -37,17 +44,22 @@ export let createCatOptionsForm = async (htmlElement) => {
     formIds.push(`selectField-${pairKey}`);
 
     formHTML += `
-      <label for="${pairKey}">${pairKey}</label>
-      <select id="selectField-${pairKey}" name="${pairKey}" id="${pairKey}">
-        ${pairValues
-          .map((pairValue) => {
-            let option = pairValue.name ? pairValue.name : pairValue;
-            return `
-            <option value="${option}">${option}</option>
-          `;
-          })
-          .join('')}
-      </select>
+      <label for="${pairKey}" class="block">${pairKey}</label>
+      <div class="inline-block relative w-64">
+        <select id="selectField-${pairKey}" name="${pairKey}" class="block appearance-none w-full bg-white text-black border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+          ${pairValues
+            .map((pairValue) => {
+              let option = pairValue.name ? pairValue.name : pairValue;
+              return `
+              <option value="${option}">${option}</option>
+            `;
+            })
+            .join('')}
+        </select>
+        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+          <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+        </div>
+      </div>
     `;
   }
 
@@ -124,7 +136,7 @@ export let getAvailableCats = async (formElements) => {
 };
 
 export let displayAvailableCats = (data, element) => {
-  let { animals: catsForAdoption, pagination } = data;
+  let { animals: catsForAdoption } = data;
   console.log(catsForAdoption);
   let sectionHTML = '';
 

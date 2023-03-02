@@ -1,51 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../style.css" />
+    <title>Purrfect Match - Adopt A Cat!</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="../style.css" />
-  <title>Purrfect Match - Adopt A Cat!</title>
-</head>
+  <body>
+    <header class="text-gray-400 bg-gray-900 body-font">
+      <div
+        class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center"
+      >
+        <a
+          class="flex title-font font-medium items-center text-white mb-4 md:mb-0"
+          href="../index.html"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            class="w-10 h-10 text-white p-2 bg-indigo-500 rounded-full"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"
+            ></path>
+          </svg>
+          <span class="ml-3 text-xl">Purrfect Match</span>
+        </a>
+        <nav
+          class="md:ml-auto flex flex-wrap items-center text-base justify-center"
+        ></nav>
+      </div>
+    </header>
 
-<body>
-  <h1 class="bg-red-600">Types of Cats:</h1>
+    <main class="text-gray-400 bg-gray-900 body-font text-white">
+      <div class="container mx-auto flex p-5 flex-col flex-row items-center">
+        <img
+          class="lg:w-2/6 md:w-3/6 w-5/6 mb-10 object-cover object-center rounded"
+          alt="hero"
+          src="https://source.unsplash.com/720x600/?cats-portrait"
+        />
+        <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-white">
+          Pick Your Cat Below:
+        </h1>
+      </div>
 
-  <form id="catOptions" class="bg-blue-500">
-    <button id="catOptionsSubmit" type="submit"
-      class="flex mx-auto mt-6 text-white bg-indigo-500 border-0 py-2 px-5 focus:outline-none hover:bg-indigo-600 rounded">
-      Search For These Cats
-    </button>
-  </form>
+      <section class="container mx-auto flex p-5 flex-col flex-row items-center">
+        <form id="catOptions" class="container mx-auto flex p-5 flex-col flex-row items-center">
+          <button
+            id="catOptionsSubmit"
+            type="submit"
+            class="flex mx-auto mt-6 text-white bg-indigo-500 border-0 py-2 px-5 focus:outline-none hover:bg-indigo-600 rounded"
+          >
+            Search For These Cats
+          </button>
+        </form>
+      </section>
 
-  <section>
-    <h2>Results:</h2>
-    <ul id="available-cats-results" class="bg-gray-100 border border-gray-200 rounded-lg divide-y divide-gray-200"></ul>
-  </section>
+      <section>
+        <h2>Results:</h2>
+        <ul
+          id="available-cats-results"
+          class="bg-gray-100 border border-gray-200 rounded-lg divide-y divide-gray-200"
+        ></ul>
+      </section>
+    </main>
 
-  <a href="../index.html">Go Back Home</a>
-  <script defer type="module" src="../src/main.js"></script>
-  <script>
-    (function () {
-      var js,
-        fs,
-        d = document,
-        id = 'tars-widget-script',
-        b = 'https://tars-file-upload.s3.amazonaws.com/bulb/';
-      if (!d.getElementById(id)) {
-        js = d.createElement('script');
-        js.id = id;
-        js.type = 'text/javascript';
-        js.src = b + 'js/widget.js';
-        fs = d.getElementsByTagName('script')[0];
-        fs.parentNode.insertBefore(js, fs);
-      }
-    })();
-    window.tarsSettings = {
-      convid: 'G0Q1PH'
-    };
-  </script>
-</body>
-
+    <a href="../index.html">Go Back Home</a>
+    <script defer type="module" src="../src/main.js"></script>
+    <script>
+      (function () {
+        var js,
+          fs,
+          d = document,
+          id = 'tars-widget-script',
+          b = 'https://tars-file-upload.s3.amazonaws.com/bulb/';
+        if (!d.getElementById(id)) {
+          js = d.createElement('script');
+          js.id = id;
+          js.type = 'text/javascript';
+          js.src = b + 'js/widget.js';
+          fs = d.getElementsByTagName('script')[0];
+          fs.parentNode.insertBefore(js, fs);
+        }
+      })();
+      window.tarsSettings = {
+        convid: 'G0Q1PH',
+      };
+    </script>
+  </body>
 </html>
