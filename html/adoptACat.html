@@ -1,49 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../style.css" />
-    <title>Purrfect Match - Adopt A Cat!</title>
-  </head>
-  <body>
-    <h1 class="bg-red-600">Types of Cats:</h1>
 
-    <form id="catOptions" class="bg-blue-500">
-      <button
-        id="catOptionsSubmit"
-        type="submit"
-        class="flex mx-auto mt-6 text-white bg-indigo-500 border-0 py-2 px-5 focus:outline-none hover:bg-indigo-600 rounded"
-      >
-        Search For These Cats
-      </button>
-    </form>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../style.css" />
+  <title>Purrfect Match - Adopt A Cat!</title>
+</head>
 
-    <section>
-      <h2>Results:</h2>
-      <ul id="available-cats-results" class="bg-gray-100 border border-gray-200 rounded-lg divide-y divide-gray-200"></ul>
-    </section>
+<body>
+  <h1 class="bg-red-600">Types of Cats:</h1>
 
-    <a href="../index.html">Go Back Home</a>
-    <script defer type="module" src="../src/main.js"></script>
-    <script>
-      (function () {
-        var js,
-          fs,
-          d = document,
-          id = 'tars-widget-script',
-          b = 'https://tars-file-upload.s3.amazonaws.com/bulb/';
-        if (!d.getElementById(id)) {
-          js = d.createElement('script');
-          js.id = id;
-          js.type = 'text/javascript';
-          js.src = b + 'js/widget.js';
-          fs = d.getElementsByTagName('script')[0];
-          fs.parentNode.insertBefore(js, fs);
-        }
-      })();
-      window.tarsSettings = { convid: 'G0Q1PH' };
-    </script>
-  </body>
+  <form id="catOptions" class="bg-blue-500">
+    <button id="catOptionsSubmit" type="submit"
+      class="flex mx-auto mt-6 text-white bg-indigo-500 border-0 py-2 px-5 focus:outline-none hover:bg-indigo-600 rounded">
+      Search For These Cats
+    </button>
+  </form>
+
+  <section>
+    <h2>Results:</h2>
+    <ul id="available-cats-results" class="bg-gray-100 border border-gray-200 rounded-lg divide-y divide-gray-200"></ul>
+  </section>
+
+  <a href="../index.html">Go Back Home</a>
+  <script defer type="module" src="../src/main.js"></script>
+  <script>
+    (function () {
+      var js,
+        fs,
+        d = document,
+        id = 'tars-widget-script',
+        b = 'https://tars-file-upload.s3.amazonaws.com/bulb/';
+      if (!d.getElementById(id)) {
+        js = d.createElement('script');
+        js.id = id;
+        js.type = 'text/javascript';
+        js.src = b + 'js/widget.js';
+        fs = d.getElementsByTagName('script')[0];
+        fs.parentNode.insertBefore(js, fs);
+      }
+    })();
+    window.tarsSettings = {
+      convid: 'G0Q1PH'
+    };
+  </script>
+</body>
+
 </html>

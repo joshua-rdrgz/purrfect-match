@@ -3,59 +3,79 @@
 @tailwind utilities;
 
 ul {
-    list-style: none; /* Removes default bullet points */
-    margin: 0; /* Removes default margin */
-    padding: 0; /* Removes default padding */
-  }
-  
-  ul li {
-    position: relative; /* Allows for absolute positioning */
-    margin-bottom: 10px; /* Adds some vertical space between list items */
-    padding-left: 20px; /* Adds space for custom bullet */
-  }
-  
-  ul li:before {
-    content: ""; /* Adds custom bullet */
-    position: absolute;
-    left: 0;
-    top: 6px;
-    height: 8px;
-    width: 8px;
-    border-radius: 50%;
-    background-color: #1abc9c; /* Changes bullet color */
-    padding-left: 7px;
-  }
+  list-style: none;
+  /* Removes default bullet points */
+  margin: 0;
+  /* Removes default margin */
+  padding: 0;
+  /* Removes default padding */
+}
 
-  ul li::after {
-    content: ""; /* Adds custom bullet */
-    position: absolute;
-    left: 0;
-    top: 6px;
-    height: 8px;
-    width: 8px;
-    border-radius: 50%;
-    background-color: #1abc9c; /* Changes bullet color */
-    padding-left: 7px;
-  }
+ul li {
+  position: relative;
+  /* Allows for absolute positioning */
+  margin-bottom: 10px;
+  /* Adds some vertical space between list items */
+  padding-left: 20px;
+  /* Adds space for custom bullet */
+}
 
-  ul li:hover {
-    color: #1abc9c; /* Changes text color on hover */
-    background-color: white;
-    cursor: pointer; /* Changes cursor to pointer on hover */
-  }
-  
-  ul li {
-    border: 1px solid #1abc9c; /* Adds a border */
-    padding: 10px; /* Increases padding */
-    margin-bottom: 15px; /* Increases margin */
-  }
+ul li:before {
+  content: "";
+  /* Adds custom bullet */
+  position: absolute;
+  left: 0;
+  top: 6px;
+  height: 8px;
+  width: 8px;
+  border-radius: 50%;
+  background-color: #1abc9c;
+  /* Changes bullet color */
+  padding-left: 7px;
+}
 
-  ul li {
-    display: inline-block; /* Makes list items inline */
-    margin-right: 10px; /* Adds space between buttons */
-    padding: 10px 20px; /* Increases padding */
-    background-color: #1abc9c; /* Changes background color */
-    color: #fff; /* Changes text color */
-    border-radius: 5px; /* Adds rounded corners */
-  }
-  
+ul li::after {
+  content: "";
+  /* Adds custom bullet */
+  position: absolute;
+  left: 0;
+  top: 6px;
+  height: 8px;
+  width: 8px;
+  border-radius: 50%;
+  background-color: #1abc9c;
+  /* Changes bullet color */
+  padding-left: 7px;
+}
+
+ul li:hover {
+  color: #1abc9c;
+  /* Changes text color on hover */
+  background-color: white;
+  cursor: pointer;
+  /* Changes cursor to pointer on hover */
+}
+
+ul li {
+  border: 1px solid #1abc9c;
+  /* Adds a border */
+  padding: 10px;
+  /* Increases padding */
+  margin-bottom: 15px;
+  /* Increases margin */
+}
+
+ul li {
+  display: inline-block;
+  /* Makes list items inline */
+  margin-right: 10px;
+  /* Adds space between buttons */
+  padding: 10px 20px;
+  /* Increases padding */
+  background-color: #1abc9c;
+  /* Changes background color */
+  color: #fff;
+  /* Changes text color */
+  border-radius: 5px;
+  /* Adds rounded corners */
+}

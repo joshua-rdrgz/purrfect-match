@@ -8,7 +8,9 @@ import {
   postImageToServer,
   getRoboFlowPrediction
 } from './apis/RoboflowApi';
-import { sendSMS } from './apis/twilioAPI.js';
+import {
+  sendSMS
+} from './apis/twilioAPI.js';
 
 // ONLY WORKS ON adoptACat.html PAGE!
 if (window.location.href.split('/').at(-1) === 'adoptACat.html') {

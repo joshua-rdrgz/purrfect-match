@@ -1,6 +1,7 @@
 export async function getFormForUploadingImage() {
   try {
-    const res = await fetch(import.meta.env.VITE_SERVER);
+    const res = await fetch(
+      import.meta.env.VITE_SERVER);
     const formHtml = res.text();
     return formHtml;
   } catch (error) {
