@@ -8,8 +8,8 @@
     <title>Purrfect Match - Adopt A Cat!</title>
   </head>
 
-  <body>
-    <header class="text-gray-400 bg-gray-900 body-font">
+  <body class="text-gray-400 bg-gray-900 body-font">
+    <header>
       <div
         class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center"
       >
@@ -39,20 +39,23 @@
       </div>
     </header>
 
-    <main class="text-gray-400 bg-gray-900 body-font text-white">
-      <div class="container mx-auto flex p-5 flex-col flex-row items-center">
-        <img
-          class="lg:w-2/6 md:w-3/6 w-5/6 mb-10 object-cover object-center rounded"
-          alt="hero"
-          src="https://source.unsplash.com/720x600/?cats-portrait"
-        />
+    <main class="text-gray-400 bg-gray-900 body-font flex flex-col gap-5">
+      <div class="container mx-auto flex p-5 flex-col items-center">
+        <figure class="w-5/6 md:w-1/3 lg:w-1/5">
+          <img
+            class="w-full mb-10 object-cover object-center rounded"
+            alt="hero"
+            src="https://source.unsplash.com/720x600/?cats-portrait"
+          />
+        </figure>
         <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-white">
           Pick Your Cat Below:
         </h1>
       </div>
 
-      <section class="container mx-auto flex p-5 flex-col flex-row items-center">
-        <form id="catOptions" class="container mx-auto flex p-5 flex-col flex-row items-center">
+      <section class="container mx-auto p-5">
+        <form id="catOptions" class="container mx-auto flex flex-col gap-4">
+          <div id="catOptionsLoading" class="text-center">Loading....</div>
           <button
             id="catOptionsSubmit"
             type="submit"
@@ -63,18 +66,19 @@
         </form>
       </section>
 
-      <section>
-        <h2>Results:</h2>
-        <ul
-          id="available-cats-results"
-          class="bg-gray-100 border border-gray-200 rounded-lg divide-y divide-gray-200"
-        ></ul>
+      <section class="flex flex-col gap-5">
+        <h2 class="text-center text-6xl font-bold">Results:</h2>
+        <div id="available-cats-results"></div>
       </section>
+
+      <div class="underline m-5 text-center">
+        <a href="../index.html">Go Back Home</a>
+      </div>
     </main>
 
-    <a href="../index.html">Go Back Home</a>
     <script defer type="module" src="../src/main.js"></script>
-    <script>
+    <!-- TARS free trial expired -->
+    <!-- <script>
       (function () {
         var js,
           fs,
@@ -93,6 +97,6 @@
       window.tarsSettings = {
         convid: 'G0Q1PH',
       };
-    </script>
+    </script> -->
   </body>
 </html>
