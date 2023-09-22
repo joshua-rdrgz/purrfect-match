@@ -1,41 +1,10 @@
 import {
-  createCatOptionsForm,
-  getAvailableCats,
-  displayAvailableCats,
-} from './pages/adoptACat';
-import {
   getFormForUploadingImage,
   postImageToServer,
   getRoboFlowPrediction,
-} from './apis/RoboflowApi';
+} from '../../src/apis/RoboflowApi';
 
-// ONLY WORKS ON adoptACat.html PAGE!
-if (window.location.href.split('/').at(-1) === 'adoptACat.html') {
-  const typesOfCatsFormElement = document.getElementById('catOptions');
-  const typesofCatsSubmitButton = document.getElementById('catOptionsSubmit');
-  const loadingCatsFormElement = document.getElementById('catOptionsLoading');
-  const displayAvailableCatsEl = document.getElementById(
-    'available-cats-results'
-  );
-  createCatOptionsForm(typesOfCatsFormElement).then((formElements) => {
-    loadingCatsFormElement.remove();
-
-    typesofCatsSubmitButton.addEventListener('click', async (e) => {
-      e.preventDefault();
-      const loadingEl = document.createElement('div');
-      loadingEl.classList.add('text-center');
-      loadingEl.textContent = 'Loading....';
-      displayAvailableCatsEl.insertAdjacentElement('beforebegin', loadingEl);
-      displayAvailableCatsEl.innerHTML = '';
-      const availableCatData = await getAvailableCats(formElements);
-      displayAvailableCats(availableCatData, displayAvailableCatsEl);
-      loadingEl.remove();
-    });
-  });
-}
-
-// ONLY WORKS ON findBreed.html PAGE!
-if (window.location.href.split('/').at(-1) === 'findBreed.html') {
+function runPage() {
   // GET IMAGE FORM ONTO PAGE
   const imageFormSection = document.getElementById('image-submission-form');
   getFormForUploadingImage().then((imageFormHtml) => {
@@ -72,3 +41,5 @@ if (window.location.href.split('/').at(-1) === 'findBreed.html') {
     });
   });
 }
+
+runPage();

@@ -1,9 +1,19 @@
+import { resolve } from 'path';
 import { defineConfig } from 'vite';
 import { config } from 'dotenv';
 
 config();
 
 export default defineConfig({
+  build: {
+    rollupOptions: {
+      input: {
+        main: resolve(__dirname, 'index.html'),
+        adoptACat: resolve(__dirname, 'pages/adopt-a-cat/index.html'),
+        findBreed: resolve(__dirname, 'pages/find-breed/index.html'),
+      },
+    },
+  },
   define: {
     'process.env.TWILIO_ACCOUNT_SID': JSON.stringify(
       process.env.TWILIO_ACCOUNT_SID
