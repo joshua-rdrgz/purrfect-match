@@ -21,7 +21,7 @@ ul li {
 }
 
 ul li:before {
-  content: "";
+  content: '';
   /* Adds custom bullet */
   position: absolute;
   left: 0;
@@ -29,13 +29,12 @@ ul li:before {
   height: 8px;
   width: 8px;
   border-radius: 50%;
-  background-color: #1abc9c;
   /* Changes bullet color */
   padding-left: 7px;
 }
 
 ul li::after {
-  content: "";
+  content: '';
   /* Adds custom bullet */
   position: absolute;
   left: 0;
@@ -43,21 +42,11 @@ ul li::after {
   height: 8px;
   width: 8px;
   border-radius: 50%;
-  background-color: #1abc9c;
   /* Changes bullet color */
   padding-left: 7px;
 }
 
-ul li:hover {
-  color: #1abc9c;
-  /* Changes text color on hover */
-  background-color: white;
-  cursor: pointer;
-  /* Changes cursor to pointer on hover */
-}
-
 ul li {
-  border: 1px solid #1abc9c;
   /* Adds a border */
   padding: 10px;
   /* Increases padding */
@@ -72,10 +61,6 @@ ul li {
   /* Adds space between buttons */
   padding: 10px 20px;
   /* Increases padding */
-  background-color: #1abc9c;
-  /* Changes background color */
-  color: #fff;
-  /* Changes text color */
   border-radius: 5px;
   /* Adds rounded corners */
 }
